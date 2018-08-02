@@ -12,13 +12,16 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
     
     let cellId = "CellId"
     var items = [N]()
-    var cellType: [T]? {
+    var cellType: [UITableViewCell.Type]? {
         return nil
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if cellType == nil {
-            cellType.map{ tableView.register($0.self, forCellReuseIdentifier: cellId)}
+
+        if cellType != nil {
+           _ = cellType?.map{ tableView.register($0.self, forCellReuseIdentifier: String(describing: $0))}
         } else {
             tableView.register(T.self, forCellReuseIdentifier: cellId)
         }
@@ -27,6 +30,14 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func checkForcellId(index: IndexPath) -> String {
+        if index.row % 2 == 0 {
+            return String(describing: cellType![0])
+        } else {
+             return String(describing: cellType![1])
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,8 +59,7 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MyGenericCell<N>
-        print("1")
+        let cell = tableView.dequeueReusableCell(withIdentifier: checkForcellId(index: indexPath), for: indexPath) as! MyGenericCell<N>
         cell.item = items[indexPath.row]
         // Configure the cell...
 
@@ -107,7 +117,7 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
 
 }
 
-class MyGenericCell<U>: UITableViewCell{
+class MyGenericCell<U>: UITableViewCell {
     var item: U?{
         didSet{
             updateData()
@@ -132,9 +142,10 @@ class MyGenericCell<U>: UITableViewCell{
     }
 }
 
-class MyFirstCell: MyGenericCell<Person>{
+class MyFirstCell: MyGenericCell<Person> {
     override func layoutSubviews() {
         super.layoutSubviews()
+        self.backgroundColor = .green
     }
     
     override func updateData() {
@@ -170,16 +181,22 @@ class MySecondCell: MyGenericCell<Person>{
     }
     override func updateData() {
        // textLabel?.text = item?.name
-        label1.text = (item?.name)! + "asdfsafsadfasdfiouewqriouweioruweiruiouerwioumncvcvdfjksmxcvm,.dfsjksadfkasdjfajskdfjksdfjkljkqwyqwerywyewuyuyuyuyuyuyuy123123112312312312312312345787878"
-        label2.text = "item?.nameasjdfjaksf asfjkl;asfjasdfjkasfjkl ;asfasjklfajklsdfjklriuwqerjklasfjkl;aweiouaeirjklqwfajkls;fasfajkls;fjkl;asfiouewrijafjkl;asfjkl;asfjkl;asfjkl;asiufewurjkl;awfjkl;adfsjkl;asdfjkldfjs"
+        label1.text = (item?.name)!
+        label2.text = ""
         layoutIfNeeded()
 
     }
 }
-struct Person{
+struct Person {
     var name: String?
 }
-class MyFirst: MyGenericTableViewController<MyFirstCell,Person>{
+class MyFirst: MyGenericTableViewController<MyFirstCell,Person> {
+    
+    override var cellType: [UITableViewCell.Type]? {
+        return [
+            MyFirstCell.self,MySecondCell.self
+        ]
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         items = [Person(name: "Rohit"), Person(name: "Mohit"), Person(name: "Nitesh"), Person(name: "Trilok"), Person(name: "Nikhil"), Person(name: "Saleem")]
