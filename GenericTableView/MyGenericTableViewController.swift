@@ -12,6 +12,7 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
     
     let cellId = "CellId"
     var items = [N]()
+    var headerSection = [String]()
     var cellType: [UITableViewCell.Type]? {
         return nil
     }
@@ -33,11 +34,7 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
     }
     
     func checkForcellId(index: IndexPath) -> String {
-        if index.row % 2 == 0 {
-            return String(describing: cellType![0])
-        } else {
-             return String(describing: cellType![1])
-        }
+        return cellId
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +46,7 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,6 +65,15 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
  
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label: UILabel = {
+            let label = UILabel()
+            label.backgroundColor = UIColor.brown
+            return label
+        }()
+        return label
     }
 
     /*
@@ -145,11 +151,12 @@ class MyGenericCell<U>: UITableViewCell {
 class MyFirstCell: MyGenericCell<Person> {
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = .green
+        self.backgroundColor = .blue
     }
     
     override func updateData() {
        textLabel?.text = item?.name
+        layoutIfNeeded()
     }
 }
 
@@ -182,9 +189,31 @@ class MySecondCell: MyGenericCell<Person>{
     override func updateData() {
        // textLabel?.text = item?.name
         label1.text = (item?.name)!
-        label2.text = ""
+        label2.text = "3232323"
         layoutIfNeeded()
 
+    }
+}
+
+class headerView1: UIView{
+    var label1: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.green
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.text = "header title"
+        return label
+    }()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(label1)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
 }
 struct Person {
@@ -200,6 +229,14 @@ class MyFirst: MyGenericTableViewController<MyFirstCell,Person> {
     override func viewDidLoad() {
         super.viewDidLoad()
         items = [Person(name: "Rohit"), Person(name: "Mohit"), Person(name: "Nitesh"), Person(name: "Trilok"), Person(name: "Nikhil"), Person(name: "Saleem")]
+    }
+    
+    override func checkForcellId(index: IndexPath) -> String {
+        if index.row % 2 == 0 {
+            return String(describing: cellType![0])
+        } else {
+            return String(describing: cellType![1])
+        }
     }
 }
 
