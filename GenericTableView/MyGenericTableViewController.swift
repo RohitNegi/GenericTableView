@@ -12,12 +12,11 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
     
     let cellId = "CellId"
     var items = [N]()
-    var cellType: [T.self]? {
+    var cellType: [T]? {
         return nil
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.estimatedRowHeight = 70
         if cellType == nil {
             cellType.map{ tableView.register($0.self, forCellReuseIdentifier: cellId)}
         } else {
