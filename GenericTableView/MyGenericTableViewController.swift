@@ -232,7 +232,7 @@ class MyFirst: MyGenericTableViewController<MyFirstCell,Person> {
     override func viewDidLoad() {
         super.viewDidLoad()
         items = [Person(name: "Rohit"), Person(name: "Mohit"), Person(name: "Nitesh"), Person(name: "Trilok"), Person(name: "Nikhil"), Person(name: "Saleem")]
-        headerSection = ["Test Header1", "Test Header2", "Test Header3", "Test Header4"]
+        headerSection = ["header titledfhasfhasfasfhasf asfasasdasfasffhjadsfiouaewfadfsasdfasdfmncvdfjkldfjklsddiuerwiuweqrjklweriouwerioueqwrjkldfsjkl;asfiouasfjasdfjklasfjkl;asfjkl;asdfjkl;asdfjkl;awiuraewrdsfaisfipuasfjkl;asfjkl;asfjkl;asdfjkl;asdjkl;fasjkl;fdjkls", "Test Header2", "Test Header3", "Test Header4"]
     }
     
     override func checkForcellId(index: IndexPath) -> String {
@@ -244,12 +244,14 @@ class MyFirst: MyGenericTableViewController<MyFirstCell,Person> {
     }
     
     override func getIdentifierForHeader(section: Int) -> String {
-        if section == 0 {
-            return String(describing: headerType![0])
-        }
-        else{
-            return String(describing: headerType![1])
-        }
+        
+        return String(describing: headerType![0])
+//        if section == 0 {
+//            return String(describing: headerType![0])
+//        }
+//        else{
+//            return String(describing: headerType![1])
+//        }
     }
 }
 

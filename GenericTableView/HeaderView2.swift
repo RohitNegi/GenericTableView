@@ -13,17 +13,18 @@ class HeaderView2: GenericHeaderView{
         label.backgroundColor = UIColor.green
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.text = "header title"
+        label.text = "header title123"
         return label
     }()
 
     override func initView() {
+        self.clipsToBounds = true
         addSubview(label1)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        addVisualConstraints(constraints: ["V:|-5-[label1]-5-|", "H:|-10-[label1]-10-|"], subViews: ["label1":label1])
+        self.addVisualConstraints(constraints: ["H:|[label1]|", "V:|[label1]|"], subViews: ["label1": label1])
     }
     override func updateHeader() {
         self.label1.text = data

@@ -43,7 +43,7 @@ class HeaderView1: GenericHeaderView{
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        addVisualConstraints(constraints: ["V:|-5-[label1]-5-[label2]-5-[label3]-5-|", "H:|-10-[label1]-10-|", "H:|-10-[label2]-10-|", "H:|-10-[label3]-10-|"], subViews: ["label1" : label1, "label2": label2, "label3": label3])
+        addVisualConstraints(constraints: ["V:|[label1][label2][label3]|", "H:|[label1]|", "H:|[label2]|", "H:|[label3]|"], subViews: ["label1" : label1, "label2": label2, "label3": label3])
     }
     override func updateHeader() {
         label1.text = data
