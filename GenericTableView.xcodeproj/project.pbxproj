@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0DE6BB21185DE10098E7A9 /* HeaderView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DE6BA21185DE10098E7A9 /* HeaderView1.swift */; };
+		3A0DE6BD21185E480098E7A9 /* HeaderView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DE6BC21185E480098E7A9 /* HeaderView2.swift */; };
+		3A0DE6BF211860BE0098E7A9 /* GenericHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DE6BE211860BE0098E7A9 /* GenericHeaderView.swift */; };
 		3A36A4C92108B97C00741D97 /* MyGenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A36A4C82108B97C00741D97 /* MyGenericTableViewController.swift */; };
 		3A36E7F3210886640018B279 /* GenericTableViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A36E7F2210886640018B279 /* GenericTableViewControl.swift */; };
 		3ABD383F20F8B2E000918B25 /* GenericTableControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD383E20F8B2E000918B25 /* GenericTableControl.swift */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0DE6BA21185DE10098E7A9 /* HeaderView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView1.swift; sourceTree = "<group>"; };
+		3A0DE6BC21185E480098E7A9 /* HeaderView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView2.swift; sourceTree = "<group>"; };
+		3A0DE6BE211860BE0098E7A9 /* GenericHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericHeaderView.swift; sourceTree = "<group>"; };
 		3A36A4C82108B97C00741D97 /* MyGenericTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGenericTableViewController.swift; sourceTree = "<group>"; };
 		3A36E7F2210886640018B279 /* GenericTableViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewControl.swift; sourceTree = "<group>"; };
 		3ABD383E20F8B2E000918B25 /* GenericTableControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableControl.swift; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 				3A36E7F2210886640018B279 /* GenericTableViewControl.swift */,
 				3A36A4C82108B97C00741D97 /* MyGenericTableViewController.swift */,
 				3AFAD264210A37E200824694 /* UIView.swift */,
+				3A0DE6BE211860BE0098E7A9 /* GenericHeaderView.swift */,
+				3A0DE6BA21185DE10098E7A9 /* HeaderView1.swift */,
+				3A0DE6BC21185E480098E7A9 /* HeaderView2.swift */,
 			);
 			path = GenericTableView;
 			sourceTree = "<group>";
@@ -149,10 +158,13 @@
 			files = (
 				3AFE3DDF20F60B4900689923 /* ViewController.swift in Sources */,
 				3A36A4C92108B97C00741D97 /* MyGenericTableViewController.swift in Sources */,
+				3A0DE6BF211860BE0098E7A9 /* GenericHeaderView.swift in Sources */,
+				3A0DE6BD21185E480098E7A9 /* HeaderView2.swift in Sources */,
 				3A36E7F3210886640018B279 /* GenericTableViewControl.swift in Sources */,
 				3ABD383F20F8B2E000918B25 /* GenericTableControl.swift in Sources */,
 				3AFAD265210A37E200824694 /* UIView.swift in Sources */,
 				3AFE3DDD20F60B4900689923 /* AppDelegate.swift in Sources */,
+				3A0DE6BB21185DE10098E7A9 /* HeaderView1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

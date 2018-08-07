@@ -12,11 +12,16 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
     
     let cellId = "CellId"
     var items = [N]()
+   
     var headerSection = [String]()
     var cellType: [UITableViewCell.Type]? {
         return nil
     }
     
+    let headerId = "HeaderView1"
+    var headerType: [UITableViewHeaderFooterView.Type]?{
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +31,15 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
         } else {
             tableView.register(T.self, forCellReuseIdentifier: cellId)
         }
+        
+        //for section header
+        if headerType != nil{
+        _ = headerType?.map{
+            tableView.register($0.self, forHeaderFooterViewReuseIdentifier: String(describing: $0))}
+        }
+        else{
+            tableView.register(T.self, forHeaderFooterViewReuseIdentifier: headerId)
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -33,8 +47,13 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    //for tableviewcell
     func checkForcellId(index: IndexPath) -> String {
         return cellId
+    }
+    
+    func getIdentifierForHeader(section: Int) -> String{
+        return headerId
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,13 +87,12 @@ class MyGenericTableViewController<T: MyGenericCell<N>, N>: UITableViewControlle
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label: UILabel = {
-            let label = UILabel()
-            label.backgroundColor = UIColor.brown
-            return label
-        }()
-        return label
+        print(getIdentifierForHeader(section: section))
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: getIdentifierForHeader(section: section)) as! GenericHeaderView
+        headerView.data = headerSection[section]
+        return headerView
     }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -195,27 +213,7 @@ class MySecondCell: MyGenericCell<Person>{
     }
 }
 
-class headerView1: UIView{
-    var label1: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor.green
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.text = "header title"
-        return label
-    }()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(label1)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-}
+
 struct Person {
     var name: String?
 }
@@ -226,9 +224,15 @@ class MyFirst: MyGenericTableViewController<MyFirstCell,Person> {
             MyFirstCell.self,MySecondCell.self
         ]
     }
+    
+    override var headerType: [UITableViewHeaderFooterView.Type]?{
+        return [HeaderView1.self, HeaderView2.self]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         items = [Person(name: "Rohit"), Person(name: "Mohit"), Person(name: "Nitesh"), Person(name: "Trilok"), Person(name: "Nikhil"), Person(name: "Saleem")]
+        headerSection = ["Test Header1", "Test Header2", "Test Header3", "Test Header4"]
     }
     
     override func checkForcellId(index: IndexPath) -> String {
@@ -236,6 +240,15 @@ class MyFirst: MyGenericTableViewController<MyFirstCell,Person> {
             return String(describing: cellType![0])
         } else {
             return String(describing: cellType![1])
+        }
+    }
+    
+    override func getIdentifierForHeader(section: Int) -> String {
+        if section == 0 {
+            return String(describing: headerType![0])
+        }
+        else{
+            return String(describing: headerType![1])
         }
     }
 }
