@@ -2,7 +2,7 @@
 //  MyGenericTableViewController.swift
 //  GenericTableView
 //
-//  Created by Chetu on 7/25/18.
+//  Created by Rohit on 7/25/18.
 //  Copyright © 2018 Admin. All rights reserved.
 //
 

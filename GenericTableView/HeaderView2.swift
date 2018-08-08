@@ -2,7 +2,7 @@
 //  HeaderView2.swift
 //  GenericTableView
 //
-//  Created by Chetu on 8/6/18.
+//  Created by Rohit on 8/6/18.
 //  Copyright © 2018 Admin. All rights reserved.
 //
 
